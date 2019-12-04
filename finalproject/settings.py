@@ -25,7 +25,7 @@ SECRET_KEY = '^ebr-2(*g+r$1j*az!sd55lc3v45a8h7s7mlv5q!x5*%vxmr%b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['DavisGoL.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -142,3 +142,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
