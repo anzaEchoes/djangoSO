@@ -39,7 +39,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'polls.apps.PollsConfig',
     'corsheaders',
+    'login',
+    'rest_framework.authtoken',
+    'rest_framework',
+    'rest_auth',
+
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -76,7 +92,14 @@ WSGI_APPLICATION = 'finalproject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -87,7 +110,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+#"""
 CORS_ALLOW_METHODS = (
     'DELETE',
     'GET',
@@ -133,5 +156,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-CORS_ORIGIN_WHITELIST = ['angularapp.ddns.net', 'ec2-34-238-82-197.compute-1.amazonaws.com', '34.238.82.197']
+CORS_ORIGIN_WHITELIST = ['davidgol.ddns.net', 'ec2-34-238-82-197.compute-1.amazonaws.com', '34.238.82.197']
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
