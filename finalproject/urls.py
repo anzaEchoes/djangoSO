@@ -17,12 +17,14 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
+from django.conf.urls import include
 from . import settings
 from rest_framework.authtoken import views
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('polls/', include('polls.urls')),
-    re_path(r'^finalproject/', include('polls.urls')),
-    re_path(r'^finalproject/login', include('login.urls')),
+    re_path(r'^finalproject/polls/', include('polls.urls')),
+    re_path(r'^finalproject/login/', include('login.urls')),
 ]
