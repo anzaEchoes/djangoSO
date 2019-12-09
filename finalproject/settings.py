@@ -156,5 +156,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-CORS_ORIGIN_WHITELIST = ['davidgol.ddns.net', 'ec2-34-238-82-197.compute-1.amazonaws.com', '34.238.82.197']
+CORS_ORIGIN_WHITELIST = ['davidgol.ddns.net', 'ec2-54-234-142-146.compute-1.amazonaws.com', '54.234.142.146']
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
