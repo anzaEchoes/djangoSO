@@ -25,6 +25,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^finalproject/polls/', include('polls.urls')),
+    re_path(r'^finalproject/', include('polls.urls')),
     re_path(r'^finalproject/login/', include('login.urls')),
 ]
