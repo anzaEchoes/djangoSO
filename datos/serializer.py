@@ -1,5 +1,5 @@
 from rest_framework import routers, serializers, viewsets
-from polls.models import Alumno, Carrera
+from datos.models import Alumno, Carrera
 
 
 class AlumnoSerializers(serializers.ModelSerializer):

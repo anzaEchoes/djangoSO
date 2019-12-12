@@ -1,37 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
-from django.http import Http404
-from polls.models import Alumno, Carrera
-from polls.serializer import AlumnoSerializers, CarreraSerializers
+from datos.models import Alumno, Carrera
+from datos.serializer import AlumnoSerializers, CarreraSerializers
+
 from rest_framework import routers, serializers, viewsets
 from rest_framework.response import Response
+
 from rest_framework.views import APIView
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
 
-# Create your views here.
-"""class IniciarSesion(APIView):
-	def get(self, request, format=None):
-        queryset = Grupo.objects.filter(delete=False)
-        serializer = GrupoSerializer(queryset, many=True)
-        return Response(serializer.data)
-    
-    def post(self, request, format=None):
-        serializer = GrupoSerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            datas = serializer.data
-            return Response(datas)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+from django.shortcuts import get_object_or_404
+from django.http import Http404
 
-def index(request):
-	return HttpResponse("Hola mundo")
-"""
-#class AlumnoLista(APIView):
-class ListaAlumnos(APIView):
-    permission_classes = (IsAuthenticated,)    
-    
+from rest_framework.permissions import IsAuthenticated  # <-- Here
+
+class AlumnoLista(APIView):
+    permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
         queryset = Alumno.objects.filter(delet=False)
         serializer = AlumnoSerializers(queryset, many=True)
@@ -40,13 +23,34 @@ class ListaAlumnos(APIView):
     def post(self, request, format=None):
         serializer = AlumnoSerializers(data = request.data)
         if serializer.is_valid():
-            print("hola")
             serializer.save()
             datas = serializer.data
             return Response(datas)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-class AlumnosDetalles(APIView):
+
+class Filtrar(APIView):
+    permission_classes = (IsAuthenticated,)
+    def get(self, request, *args, **kwargs):
+        nombre=kwargs.get('nombre')
+        nombre=nombre.replace('_',' ')
+        try:
+            apellidos=kwargs.get('apellidos')
+            apellidos=apellidos.replace('_',' ')
+            console.log('apellidos: '+apellidos)
+            queryset= Alumno.objects.filter(nombre=nombre, apellidos=apellidos, delet=False)
+        except:
+            queryset= Alumno.objects.filter(nombre=nombre, delet=False)
+        if len(queryset) is 0:
+            try:
+                carreraid= Carrera.objects.filter(nombre_carrera=nombre, delet=False).values('id')[0]['id']
+                queryset= Alumno.objects.filter(carrera=carreraid, delet=False)
+            except:
+                queryset= Alumno.objects.filter(edad=nombre, delet=False)
+        serializer = AlumnoSerializers(queryset, many=True)
+        return Response(serializer.data)
+
+class AlumnoDetalles(APIView):
     permission_classes = (IsAuthenticated,)    
     def get_object(self, id):
         try:

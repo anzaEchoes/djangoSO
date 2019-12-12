@@ -1,12 +1,14 @@
 from django.shortcuts import render
+
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+
 from rest_framework import generics
 
-
-# Create your views here.
-class loginInit(ObtainAuthToken):
+#from Login import models
+#from Login import serializers
+class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data = request.data,
         context = {'request':request}) 
@@ -19,3 +21,5 @@ class loginInit(ObtainAuthToken):
             'user_id': user.pk,
             'username': user.username
         })
+
+    

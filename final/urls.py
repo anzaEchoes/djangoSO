@@ -1,4 +1,4 @@
-"""finalproject URL Configuration
+"""final URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -13,18 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, re_path
+from django.conf.urls import include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
-from django.conf.urls import include
 from . import settings
-from rest_framework.authtoken import views
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from rest_framework.authtoken import views
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^finalproject/', include('polls.urls')),
-    re_path(r'^finalproject/login/', include('login.urls')),
+    re_path(r'^finalproject/', include('datos.urls')),
+    re_path(r'^finalproject/login', include('login.urls')),
+
 ]
