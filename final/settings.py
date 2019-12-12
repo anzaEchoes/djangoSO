@@ -25,7 +25,7 @@ SECRET_KEY = '70#8x$xo0uflg(n73(ic_=9=x%z2a3j_*n+^#9096pu4dhxsa_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -103,10 +103,21 @@ WSGI_APPLICATION = 'final.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'databasepg',
+        'USER': 'postgres',
+        'PASSWORD': 'david117',
+        'HOST': 'databasepg.cxbnferhevwz.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -148,4 +159,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-#CORS_ORIGIN_WHITELIST = 'localhost:4200',
+CORS_ORIGIN_WHITELIST = ['davidgol.ddns.net', 'ec2-54-234-142-146.compute-1.amazonaws.com', '54.234.142.146']
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
